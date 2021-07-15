@@ -3,6 +3,7 @@
 export(assert_is_whole_number)
 export(assert_non_empty_string)
 export(assert_that)
+export(class_is)
 export(fmtbold)
 export(fmterror)
 export(fmtsuccess)
