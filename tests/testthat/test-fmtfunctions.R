@@ -3,7 +3,7 @@
 #       functions <- c(utilitybeltassertions::fmtbold, fmterror, fmtwarning, fmtsuccess)
 #       for (fun in functions){
 #         #message("\n\ninput:", input)
-#         browser()
+#         #browser()
 #         testthat::expect_true(is.character(fun(input)))
 #         testthat::expect_equal(length(fun(input)), 1)
 #         testthat::expect_gt(nchar(fun(input)), nchar(input))
