@@ -1,13 +1,13 @@
 #' @title Test Assertion with Invisible Return
 #' @description
-#' Wraps around asserthat::assert_that() but makes return value invisible (can be assigned but will not print when not assigned)
+#' Wraps around asserthat::assertthat::assert_that() but makes return value invisible (can be assigned but will not print when not assigned)
 #' @param ... see ?assertthat::assert_that
 #' @param env see ?assertthat::assert_that
 #' @param msg see ?assertthat::assert_that
 #' @return invisible (TRUE) if expression is TRUE. Will error if is FALSE
 #' @family customassertions
 #' @export
-assert_that <- function(..., env = parent.frame(), msg = NULL){
+assert_that_invisible <- function(..., env = parent.frame(), msg = NULL){
   return(invisible(assertthat::assert_that(..., env=env, msg=msg)))
 }
 
@@ -25,8 +25,8 @@ assert_that <- function(..., env = parent.frame(), msg = NULL){
 #'
 #' @export
 assert_non_empty_string <- function(object, msg=""){
-  assert_that(assertthat::is.string(object), msg = fmterror("assert_non_empty_string:  The object [", substitute(object), "] must be a string, not a ", class(object), ". ", msg))
-  assert_that(nchar(object) > 0, msg = fmterror("assert_non_empty_string: object [", substitute(object), "] is a string but it is empty (''). ", msg))
+  assertthat::assert_that(assertthat::is.string(object), msg = fmterror("assert_non_empty_string:  The object [", substitute(object), "] must be a string, not a ", class(object), ". ", msg))
+  assertthat::assert_that(nchar(object) > 0, msg = fmterror("assert_non_empty_string: object [", substitute(object), "] is a string but it is empty (''). ", msg))
 }
 
 
@@ -44,6 +44,30 @@ assert_non_empty_string <- function(object, msg=""){
 #'
 #' @export
 assert_is_whole_number <- function(object, msg=""){
-  assert_that(assertthat::is.number(object), msg=fmterror("assert_is_whole_number: ", "The object [", substitute(object), "] is a '", class(object), "',not a number (a length one numeric vector).", msg))
-  assert_that(object - round(object) == 0, msg=fmterror("assert_is_whole_number: ", "The object [", substitute(object), "] is not a whole number (no decimal place).", msg))
+  assertthat::assert_that(assertthat::is.number(object), msg=fmterror("assert_is_whole_number: ", "The object [", substitute(object), "] is a '", class(object), "',not a number (a length one numeric vector).", msg))
+  assertthat::assert_that(object - round(object) == 0, msg=fmterror("assert_is_whole_number: ", "The object [", substitute(object), "] is not a whole number (no decimal place).", msg))
+}
+
+#' assert_names_include
+#'
+#' @param object an object (usually vector or dataframe) that you want to assert has certain names
+#' @param expected_names names you expect the object to have (order doesn't matter) (character vector)
+#' @param object_name_in_error_message how to refer to the object in the error message
+#'
+#' @export
+#'
+#' @examples
+#' assert_names_include(mtcars, expected_names = c("mpg", "cyl"))
+assert_names_include <- function(object, expected_names, object_name_in_error_message = NA){
+  assertthat::assert_that(is.character(expected_names) ,msg = paste0("assert_names_include: expected names should be a 'character vector', not a '", class(expected_names) ,"'"))
+
+  if(is.na(object_name_in_error_message)){
+    object_name_in_error_message = as.character(substitute(object))
+  }
+
+  names = names(object)
+  names_not_included = paste0(expected_names[!expected_names %in% names], collapse = ", ")
+  assertthat::assert_that(
+    all(expected_names %in% names),
+    msg = fmterror("[",object_name_in_error_message,"]"," does not contain all expected names. missing [", names_not_included, "]"))
 }

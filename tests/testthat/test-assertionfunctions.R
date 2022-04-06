@@ -1,13 +1,13 @@
 test_that("assert_that wrapper works", {
-    expect_true(assert_that(is.character("Hi friends")))
-    expect_true(assert_that(is.numeric(5)))
-    expect_true(assert_that(is.data.frame(data.frame(hi=1:5, alpha = LETTERS[1:5]))))
-    expect_error(assert_that(is.double(c("Hi", "Friends"))))
+    expect_true(assertthat::assert_that(is.character("Hi friends")))
+    expect_true(assertthat::assert_that(is.numeric(5)))
+    expect_true(assertthat::assert_that(is.data.frame(data.frame(hi=1:5, alpha = LETTERS[1:5]))))
+    expect_error(assertthat::assert_that(is.double(c("Hi", "Friends"))))
 
     #Test output is invisible (see ?invisible())
     #logfile.path = paste0(system.file(package="utilitybelt"), "/assert_that_unit_test.log")
     #sink(logfile.path)
-    #assert_that(is.character("Hi friends"))
+    #assertthat::assert_that(is.character("Hi friends"))
     #sink()
     #expect_true(file.size(logfile.path)==0)
     #file.remove(logfile.path)

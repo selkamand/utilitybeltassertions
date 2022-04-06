@@ -2,3 +2,4 @@
 ^renv\.lock$
 ^utilitybeltassertions\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$

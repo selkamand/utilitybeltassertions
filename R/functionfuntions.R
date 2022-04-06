@@ -25,7 +25,7 @@
 #' wrapper_wrapper(100, verbose=TRUE) # Returns "base" + message
 #'
 get_calling_function <- function(n_function_calls_ago=1, verbose = TRUE) {
-  #utilitybelt::assert_that(assertthat::is.number(n_function_calls_ago), assertive::is_whole_number(n_function_calls_ago))
+  #utilitybelt::assertthat::assert_that(assertthat::is.number(n_function_calls_ago), assertive::is_whole_number(n_function_calls_ago))
   assert_is_whole_number(n_function_calls_ago)
   stack_position = n_function_calls_ago*-1
   calling_function <- tryCatch(
@@ -66,7 +66,7 @@ get_calling_function <- function(n_function_calls_ago=1, verbose = TRUE) {
 #' my_function <- function(a, b, c, d, e, f, g) { return(fun_count_arguments(my_function)) }
 #' my_function() # Equals 7
 fun_count_arguments <- function(FUN){
-  assert_that(is.function(FUN), msg = fmterror("fun_count_arguments: FUN must be a function, not a: ", class(FUN)))
+  assertthat::assert_that(is.function(FUN), msg = fmterror("fun_count_arguments: FUN must be a function, not a: ", class(FUN)))
   number_of_arguments = length(formals(FUN))
   return(number_of_arguments)
 }

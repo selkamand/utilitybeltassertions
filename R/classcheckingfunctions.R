@@ -9,6 +9,6 @@
 #' @export
 #'
 class_is <- function(object, tested_class){
-  assert_that(is.character(tested_class))
+  assertthat::assert_that(is.character(tested_class))
   all(class(object) == tested_class)
 }

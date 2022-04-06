@@ -24,6 +24,6 @@ assert_is_whole_number(5)
 \seealso{
 Other customassertions: 
 \code{\link{assert_non_empty_string}()},
-\code{\link{assert_that}()}
+\code{\link{assert_that_invisible}()}
 }
 \concept{customassertions}
