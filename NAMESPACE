@@ -3,6 +3,7 @@
 export(assert_is_whole_number)
 export(assert_names_include)
 export(assert_non_empty_string)
+export(assert_program_exists_in_path)
 export(assert_that_invisible)
 export(class_is)
 export(fmtbold)

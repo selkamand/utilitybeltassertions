@@ -71,3 +71,27 @@ assert_names_include <- function(object, expected_names, object_name_in_error_me
     all(expected_names %in% names),
     msg = fmterror("[",object_name_in_error_message,"]"," does not contain all expected names. missing [", names_not_included, "]"))
 }
+
+#' Assert a program is in path
+#'
+#' Check if program is available in path Should work on all operating systems
+#'
+#' @param program_name name/s of program to search for in path (character)
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' assert_program_exists_in_path(c("grep", "wget"))
+#' }
+assert_program_exists_in_path <- function(program_names){
+  assertthat::assert_that(is.character(program_names))
+
+  program_paths <- Sys.which(program_names)
+  programs_not_found <- program_paths[program_paths==""]
+  programs_not_found_string <- paste0(names(programs_not_found), collapse = ", ")
+  assertthat::assert_that(
+    !any(Sys.which(program_names)==""),
+    msg = fmterror("Could not find executable/s [",programs_not_found_string,"] in PATH Please ensure tool is installed, marked as executable, and available in your path")
+  )
+}
