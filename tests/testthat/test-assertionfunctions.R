@@ -44,17 +44,17 @@ test_that("assert_is_whole_number works", {
     expect_error(assert_is_whole_number("string", msg = "THIS IS MY ERROR MESSAGE"), "THIS IS MY ERROR MESSAGE")
   })
 
-test_that("assert_filename_has_valid_extension works", {
-  expect_true(assert_filename_has_valid_extension(filename = "test.txt", valid_extensions = "txt"))
-  expect_true(assert_filename_has_valid_extension(filename = "test.txt", valid_extensions = c("txt", "tsv")))
-  expect_true(assert_filename_has_valid_extension(filename = "test.txt.idx", valid_extensions = c("txt.idx")))
-  expect_true(assert_filename_has_valid_extension(filename = "test.txt.idx", valid_extensions = c("idx", "txt")))
-  expect_true(assert_filename_has_valid_extension(filename = c("test.txt", "test2.txt"), valid_extensions = c("txt")))
-  expect_true(assert_filename_has_valid_extension(filename = c("test.txt", "test2.txt"), valid_extensions = c("idx","txt")))
+test_that("assert_filenames_have_valid_extensions works", {
+  expect_true(assert_filenames_have_valid_extensions(filenames = "test.txt", valid_extensions = "txt"))
+  expect_true(assert_filenames_have_valid_extensions(filenames = "test.txt", valid_extensions = c("txt", "tsv")))
+  expect_true(assert_filenames_have_valid_extensions(filenames = "test.txt.idx", valid_extensions = c("txt.idx")))
+  expect_true(assert_filenames_have_valid_extensions(filenames = "test.txt.idx", valid_extensions = c("idx", "txt")))
+  expect_true(assert_filenames_have_valid_extensions(filenames = c("test.txt", "test2.txt"), valid_extensions = c("txt")))
+  expect_true(assert_filenames_have_valid_extensions(filenames = c("test.txt", "test2.txt"), valid_extensions = c("idx","txt")))
 
-  expect_error(assert_filename_has_valid_extension(filename = "test.txt.idx", valid_extensions = c("txt")))
-  expect_error(assert_filename_has_valid_extension(filename = c("test.txt", "test2.txt", "test3.idx"), valid_extensions = c("txt")), regexp = "test3.idx")
-  expect_error(assert_filename_has_valid_extension(filename = c("test.txt", "test3.idx", "test2.txt"), valid_extensions = c("txt")), regexp = "test3.idx")
+  expect_error(assert_filenames_have_valid_extensions(filenames = "test.txt.idx", valid_extensions = c("txt")))
+  expect_error(assert_filenames_have_valid_extensions(filenames = c("test.txt", "test2.txt", "test3.idx"), valid_extensions = c("txt")), regexp = "test3.idx")
+  expect_error(assert_filenames_have_valid_extensions(filenames = c("test.txt", "test3.idx", "test2.txt"), valid_extensions = c("txt")), regexp = "test3.idx")
 
   })
 
