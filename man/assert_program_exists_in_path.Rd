@@ -7,7 +7,7 @@
 assert_program_exists_in_path(program_names)
 }
 \arguments{
-\item{program_name}{name/s of program to search for in path (character)}
+\item{program_names}{name/s of program to search for in path (character)}
 }
 \description{
 Check if program is available in path Should work on all operating systems

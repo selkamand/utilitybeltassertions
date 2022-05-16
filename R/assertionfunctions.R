@@ -76,7 +76,7 @@ assert_names_include <- function(object, expected_names, object_name_in_error_me
 #'
 #' Check if program is available in path Should work on all operating systems
 #'
-#' @param program_name name/s of program to search for in path (character)
+#' @param program_names name/s of program to search for in path (character)
 #'
 #' @export
 #'
@@ -94,4 +94,24 @@ assert_program_exists_in_path <- function(program_names){
     !any(Sys.which(program_names)==""),
     msg = fmterror("Could not find executable/s [",programs_not_found_string,"] in PATH Please ensure tool is installed, marked as executable, and available in your path")
   )
+}
+
+#' Assert file has the expected extension
+#'
+#' Take a filename / vector of filenames and assert that they all end with one of the user-supplied 'valid extensions'
+#'
+#' @param filename filenames to assert has a valid extension (character)
+#' @param valid_extensions all possible valid extensions (character)
+#'
+#' @export
+#'
+#' @examples
+#' # Ensure filename has a "fasta" or 'fa' extension
+#' assert_filename_has_valid_extension(filename="sequence.fasta", valid_extensions = c("fasta", "fa"))
+assert_filename_has_valid_extension <- function(filename, valid_extensions){
+  pattern=paste0(paste0("\\.",valid_extensions, "$"), collapse = "|")
+
+  filenames_have_valid_extension = grepl(x=filename, pattern = pattern)
+  filenames_lacking_valid_extension = filename[!filenames_have_valid_extension]
+  assertthat::assert_that(all(filenames_have_valid_extension), msg = fmterror("assert_string_has_valid_extension: Filenames [", paste0(filenames_lacking_valid_extension, collapse = ", ") ,"] do not contain valid extensions [", paste0(valid_extensions, collapse = ", ") ,"]"))
 }
