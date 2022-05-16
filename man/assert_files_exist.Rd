@@ -16,6 +16,9 @@ Do all files exist
 }
 \examples{
 \dontrun{
-assert_files_exist(c("/path/to/file1", "/path/to/file2"), supplementary_error_message = "Please run X to produce files you need")
+assert_files_exist(
+  c("/path/to/file1", "/path/to/file2"),
+  supplementary_error_message = "Please run X to produce files you need"
+)
 }
 }

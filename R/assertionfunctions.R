@@ -126,7 +126,10 @@ assert_filename_has_valid_extension <- function(filename, valid_extensions, igno
 #'
 #' @examples
 #' \dontrun{
-#' assert_files_exist(c("/path/to/file1", "/path/to/file2"), supplementary_error_message = "Please run X to produce files you need")
+#' assert_files_exist(
+#'   c("/path/to/file1", "/path/to/file2"),
+#'   supplementary_error_message = "Please run X to produce files you need"
+#' )
 #' }
 assert_files_exist <- function(filepaths, supplementary_error_message = ""){
   files_exist_lgl <- file.exists(filepaths)
