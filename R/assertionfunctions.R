@@ -108,7 +108,10 @@ assert_program_exists_in_path <- function(program_names){
 #'
 #' @examples
 #' # Ensure filename has a "fasta" or 'fa' extension
-#' assert_filenames_have_valid_extensions(filename="sequence.fasta", valid_extensions = c("fasta", "fa"))
+#' assert_filenames_have_valid_extensions(
+#'   filename="sequence.fasta",
+#'   valid_extensions = c("fasta", "fa")
+#' )
 assert_filenames_have_valid_extensions <- function(filenames, valid_extensions, ignore_case = TRUE){
   pattern=paste0(paste0("\\.",valid_extensions, "$"), collapse = "|")
 

@@ -22,5 +22,8 @@ Take a filename / vector of filenames and assert that they all end with one of t
 }
 \examples{
 # Ensure filename has a "fasta" or 'fa' extension
-assert_filenames_have_valid_extensions(filename="sequence.fasta", valid_extensions = c("fasta", "fa"))
+assert_filenames_have_valid_extensions(
+  filename="sequence.fasta",
+  valid_extensions = c("fasta", "fa")
+)
 }
