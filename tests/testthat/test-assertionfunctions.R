@@ -57,3 +57,27 @@ test_that("assert_filename_has_valid_extension works", {
   expect_error(assert_filename_has_valid_extension(filename = c("test.txt", "test3.idx", "test2.txt"), valid_extensions = c("txt")), regexp = "test3.idx")
 
   })
+
+
+test_that("assert_files_exist", {
+
+  # Set up test environment
+  filename1=tempfile(pattern = "testfile")
+  filename2=tempfile(pattern = "testfile")
+  filename3=tempfile(pattern = "testfile")
+  filename_nonexistant=tempfile()
+
+  file.create(filename1)
+  file.create(filename2)
+  file.create(filename3)
+
+  # Run tests
+  expect_true(assert_files_exist(filepaths = filename1))
+  expect_true(assert_files_exist(filepaths = c(filename1, filename2, filename3)))
+
+  expect_error(assert_files_exist(filepaths = filename_nonexistant), regexp = filename_nonexistant)
+  expect_error(assert_files_exist(filepaths = c(filename1, filename2, filename3, filename_nonexistant)), regexp = filename_nonexistant)
+
+  # cleanup temp files
+  file.remove(c(filename1, filename2, filename3))
+})

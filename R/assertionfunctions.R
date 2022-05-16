@@ -116,3 +116,20 @@ assert_filename_has_valid_extension <- function(filename, valid_extensions, igno
   filenames_lacking_valid_extension = filename[!filenames_have_valid_extension]
   assertthat::assert_that(all(filenames_have_valid_extension), msg = fmterror("assert_string_has_valid_extension: Filenames [", paste0(filenames_lacking_valid_extension, collapse = ", ") ,"] do not contain valid extensions [", paste0(valid_extensions, collapse = ", ") ,"]"))
 }
+
+#' Do all files exist
+#'
+#' @param filepaths filepaths (character)
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' assert_files_exist(c("/path/to/file1", "/path/to/file2"))
+#' }
+assert_files_exist <- function(filepaths){
+  files_exist_lgl <- file.exists(filepaths)
+  files_that_dont_exist <- filepaths[!files_exist_lgl]
+
+  assertthat::assert_that(all(files_exist_lgl), msg = fmterror("assert_files_exist: Could not find the files [", paste0(files_that_dont_exist, collapse = ", "), "]"))
+}
