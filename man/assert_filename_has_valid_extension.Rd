@@ -4,12 +4,18 @@
 \alias{assert_filename_has_valid_extension}
 \title{Assert file has the expected extension}
 \usage{
-assert_filename_has_valid_extension(filename, valid_extensions)
+assert_filename_has_valid_extension(
+  filename,
+  valid_extensions,
+  ignore_case = TRUE
+)
 }
 \arguments{
 \item{filename}{filenames to assert has a valid extension (character)}
 
 \item{valid_extensions}{all possible valid extensions (character)}
+
+\item{ignore_case}{does the case (uppercase/lowercase) of the extensions matter? (bool)}
 }
 \description{
 Take a filename / vector of filenames and assert that they all end with one of the user-supplied 'valid extensions'
