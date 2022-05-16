@@ -4,16 +4,18 @@
 \alias{assert_files_exist}
 \title{Do all files exist}
 \usage{
-assert_files_exist(filepaths)
+assert_files_exist(filepaths, supplementary_error_message = "")
 }
 \arguments{
 \item{filepaths}{filepaths (character)}
+
+\item{supplementary_error_message}{supplementary error message - e.g. a line describing what functions to run to produce required files (string)}
 }
 \description{
 Do all files exist
 }
 \examples{
 \dontrun{
-assert_files_exist(c("/path/to/file1", "/path/to/file2"))
+assert_files_exist(c("/path/to/file1", "/path/to/file2"), supplementary_error_message = "Please run X to produce files you need")
 }
 }

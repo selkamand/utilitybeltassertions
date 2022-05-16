@@ -120,16 +120,17 @@ assert_filename_has_valid_extension <- function(filename, valid_extensions, igno
 #' Do all files exist
 #'
 #' @param filepaths filepaths (character)
+#' @param supplementary_error_message supplementary error message - e.g. a line describing what functions to run to produce required files (string)
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' assert_files_exist(c("/path/to/file1", "/path/to/file2"))
+#' assert_files_exist(c("/path/to/file1", "/path/to/file2"), supplementary_error_message = "Please run X to produce files you need")
 #' }
-assert_files_exist <- function(filepaths){
+assert_files_exist <- function(filepaths, supplementary_error_message = ""){
   files_exist_lgl <- file.exists(filepaths)
   files_that_dont_exist <- filepaths[!files_exist_lgl]
 
-  assertthat::assert_that(all(files_exist_lgl), msg = fmterror("assert_files_exist: Could not find the files [", paste0(files_that_dont_exist, collapse = ", "), "]"))
+  assertthat::assert_that(all(files_exist_lgl), msg = fmterror("assert_files_exist: Could not find the file/s [", paste0(files_that_dont_exist, collapse = ", "), "].", "\n", supplementary_error_message))
 }
