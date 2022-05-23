@@ -147,7 +147,7 @@ assert_files_exist <- function(filepaths, supplementary_error_message = ""){
 #'
 #' @param test_values values to check are equal to one of the values in set (character/numeric)
 #' @param acceptable_values valid options for elements in test_values (character/numeric)
-#' @param name name used to describe test values. Used in error message reporting i.e.  ('name' must be one of)
+#' @param name name used to describe test values. Used in error message reporting (i.e. 'name' must be one of <acceptable_values>)
 #'
 #' @export
 #'

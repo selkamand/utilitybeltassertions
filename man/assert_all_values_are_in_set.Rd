@@ -15,7 +15,7 @@ assert_all_values_are_in_set(
 
 \item{acceptable_values}{valid options for elements in test_values (character/numeric)}
 
-\item{name}{name used to describe test values. Used in error message reporting i.e.  ('name' must be one of)}
+\item{name}{name used to describe test values. Used in error message reporting (i.e. 'name' must be one of <acceptable_values>)}
 }
 \description{
 Check if test_values are one of those described in 'set' vector
