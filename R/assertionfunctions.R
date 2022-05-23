@@ -140,3 +140,24 @@ assert_files_exist <- function(filepaths, supplementary_error_message = ""){
 
   assertthat::assert_that(all(files_exist_lgl), msg = fmterror("assert_files_exist: Could not find the file/s [", paste0(files_that_dont_exist, collapse = ", "), "].", "\n", supplementary_error_message))
 }
+
+#' Check values are in set
+#'
+#' Check if test_values are one of those described in 'set' vector
+#'
+#' @param test_values values to check are equal to one of the values in set (character/numeric)
+#' @param acceptable_values valid options for elements in test_values (character/numeric)
+#' @param name name used to describe test values. Used in error message reporting i.e.  ('name' must be one of)
+#'
+#' @export
+#'
+#' @examples
+#' set = c("A", "B", "C")
+#' letters = c("A", "B", "B")
+#' assert_all_values_are_in_set(letters, set)
+#'
+assert_all_values_are_in_set <- function(test_values, acceptable_values, name = rlang::caller_arg(test_values)){
+  elements_not_included_in_set = unique(test_values[!test_values %in% acceptable_values])
+  assertthat::assert_that(length(elements_not_included_in_set) == 0, msg = fmterror("assert_all_are_in: ",name," must only contain the elements [", paste0(unique(acceptable_values), collapse = ", "), "]. \n\nThe following values do not meet this criterion:\n", paste0(elements_not_included_in_set, collapse = "\n")))
+
+}
