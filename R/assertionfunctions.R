@@ -15,7 +15,7 @@ assert_that_invisible <- function(..., env = parent.frame(), msg = NULL){
 #' Check object is a non-empty string
 #'
 #' @param object Some value you want to assert is a non-empty string
-#' @param msg Some message to print on failure (appended to the hard-coded message). Will automatically get wrapped in fmterror (string)
+#' @param msg Some message to print on failure (appended to the hard-coded message). Will automatically get wrapped in utilitybeltfmt::fmterror (string)
 #' @return invisible(TRUE) if the object is a non-empty string. Throws an error if it is not.
 #' @examples
 #' possiblestring = "Billy"
@@ -25,8 +25,8 @@ assert_that_invisible <- function(..., env = parent.frame(), msg = NULL){
 #'
 #' @export
 assert_non_empty_string <- function(object, msg=""){
-  assertthat::assert_that(assertthat::is.string(object), msg = fmterror("assert_non_empty_string:  The object [", substitute(object), "] must be a string, not a ", class(object), ". ", msg))
-  assertthat::assert_that(nchar(object) > 0, msg = fmterror("assert_non_empty_string: object [", substitute(object), "] is a string but it is empty (''). ", msg))
+  assertthat::assert_that(assertthat::is.string(object), msg = utilitybeltfmt::fmterror("assert_non_empty_string:  The object [", substitute(object), "] must be a string, not a ", class(object), ". ", msg))
+  assertthat::assert_that(nchar(object) > 0, msg = utilitybeltfmt::fmterror("assert_non_empty_string: object [", substitute(object), "] is a string but it is empty (''). ", msg))
 }
 
 
@@ -35,7 +35,7 @@ assert_non_empty_string <- function(object, msg=""){
 #' Checks if object is a whole number (e.g. 1, 5, 5.0, 6.000). Vectors are flagged as NOT whole numbers (intentional behaviour).
 #'
 #' @param object Some value you want to assert is a whole number (single scalar value)
-#' @param msg Some message to print on failure (appended to the hard-coded message). Will automatically get wrapped in fmterror (string)
+#' @param msg Some message to print on failure (appended to the hard-coded message). Will automatically get wrapped in utilitybeltfmt::fmterror (string)
 #' @return invisible(TRUE) if the object passes the assertion. Throws an error if it does not.
 #' @examples
 #' assert_is_whole_number(5)
@@ -44,8 +44,8 @@ assert_non_empty_string <- function(object, msg=""){
 #'
 #' @export
 assert_is_whole_number <- function(object, msg=""){
-  assertthat::assert_that(assertthat::is.number(object), msg=fmterror("assert_is_whole_number: ", "The object [", substitute(object), "] is a '", class(object), "',not a number (a length one numeric vector).", msg))
-  assertthat::assert_that(object - round(object) == 0, msg=fmterror("assert_is_whole_number: ", "The object [", substitute(object), "] is not a whole number (no decimal place).", msg))
+  assertthat::assert_that(assertthat::is.number(object), msg=utilitybeltfmt::fmterror("assert_is_whole_number: ", "The object [", substitute(object), "] is a '", class(object), "',not a number (a length one numeric vector).", msg))
+  assertthat::assert_that(object - round(object) == 0, msg=utilitybeltfmt::fmterror("assert_is_whole_number: ", "The object [", substitute(object), "] is not a whole number (no decimal place).", msg))
 }
 
 #' assert_names_include
@@ -69,7 +69,7 @@ assert_names_include <- function(object, expected_names, object_name_in_error_me
   names_not_included = paste0(expected_names[!expected_names %in% names], collapse = ", ")
   assertthat::assert_that(
     all(expected_names %in% names),
-    msg = fmterror("[",object_name_in_error_message,"]"," does not contain all expected names. missing [", names_not_included, "]"))
+    msg = utilitybeltfmt::fmterror("[",object_name_in_error_message,"]"," does not contain all expected names. missing [", names_not_included, "]"))
 }
 
 #' Assert a program is in path
@@ -92,7 +92,7 @@ assert_program_exists_in_path <- function(program_names){
   programs_not_found_string <- paste0(names(programs_not_found), collapse = ", ")
   assertthat::assert_that(
     !any(Sys.which(program_names)==""),
-    msg = fmterror("Could not find executable/s [",programs_not_found_string,"] in PATH Please ensure tool is installed, marked as executable, and available in your path")
+    msg = utilitybeltfmt::fmterror("Could not find executable/s [",programs_not_found_string,"] in PATH Please ensure tool is installed, marked as executable, and available in your path")
   )
 }
 
@@ -117,7 +117,7 @@ assert_filenames_have_valid_extensions <- function(filenames, valid_extensions, 
 
   filenames_have_valid_extension = grepl(x=filenames, pattern = pattern, ignore.case = ignore_case)
   filenames_lacking_valid_extension = filenames[!filenames_have_valid_extension]
-  assertthat::assert_that(all(filenames_have_valid_extension), msg = fmterror("assert_string_has_valid_extension: Filenames [", paste0(filenames_lacking_valid_extension, collapse = ", ") ,"] do not contain valid extensions [", paste0(valid_extensions, collapse = ", ") ,"]"))
+  assertthat::assert_that(all(filenames_have_valid_extension), msg = utilitybeltfmt::fmterror("assert_string_has_valid_extension: Filenames [", paste0(filenames_lacking_valid_extension, collapse = ", ") ,"] do not contain valid extensions [", paste0(valid_extensions, collapse = ", ") ,"]"))
 }
 
 #' Do all files exist
@@ -138,7 +138,7 @@ assert_files_exist <- function(filepaths, supplementary_error_message = ""){
   files_exist_lgl <- file.exists(filepaths)
   files_that_dont_exist <- filepaths[!files_exist_lgl]
 
-  assertthat::assert_that(all(files_exist_lgl), msg = fmterror("assert_files_exist: Could not find the file/s [", paste0(files_that_dont_exist, collapse = ", "), "].", "\n", supplementary_error_message))
+  assertthat::assert_that(all(files_exist_lgl), msg = utilitybeltfmt::fmterror("assert_files_exist: Could not find the file/s [", paste0(files_that_dont_exist, collapse = ", "), "].", "\n", supplementary_error_message))
 }
 
 #' Check values are in set
@@ -158,6 +158,6 @@ assert_files_exist <- function(filepaths, supplementary_error_message = ""){
 #'
 assert_all_values_are_in_set <- function(test_values, acceptable_values, name = rlang::caller_arg(test_values)){
   elements_not_included_in_set = unique(test_values[!test_values %in% acceptable_values])
-  assertthat::assert_that(length(elements_not_included_in_set) == 0, msg = fmterror("assert_all_are_in: ",name," must only contain the elements [", paste0(unique(acceptable_values), collapse = ", "), "]. \n\nThe following values do not meet this criterion:\n", paste0(elements_not_included_in_set, collapse = "\n")))
+  assertthat::assert_that(length(elements_not_included_in_set) == 0, msg = utilitybeltfmt::fmterror("assert_all_are_in: ",name," must only contain the elements [", paste0(unique(acceptable_values), collapse = ", "), "]. \n\nThe following values do not meet this criterion:\n", paste0(elements_not_included_in_set, collapse = "\n")))
 
 }

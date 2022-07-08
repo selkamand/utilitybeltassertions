@@ -31,7 +31,7 @@ get_calling_function <- function(n_function_calls_ago=1, verbose = TRUE) {
   calling_function <- tryCatch(
     expr = { sys.call(stack_position) },
     error = function(err){
-      if (verbose) message(fmtwarning("Not that many frames on the stack, returning 'base' as the nearest approximation"))
+      if (verbose) message(utilitybeltfmt::fmtwarning("Not that many frames on the stack, returning 'base' as the nearest approximation"))
       return(NULL)
     })
 
@@ -66,7 +66,7 @@ get_calling_function <- function(n_function_calls_ago=1, verbose = TRUE) {
 #' my_function <- function(a, b, c, d, e, f, g) { return(fun_count_arguments(my_function)) }
 #' my_function() # Equals 7
 fun_count_arguments <- function(FUN){
-  assertthat::assert_that(is.function(FUN), msg = fmterror("fun_count_arguments: FUN must be a function, not a: ", class(FUN)))
+  assertthat::assert_that(is.function(FUN), msg = utilitybeltfmt::fmterror("fun_count_arguments: FUN must be a function, not a: ", class(FUN)))
   number_of_arguments = length(formals(FUN))
   return(number_of_arguments)
 }

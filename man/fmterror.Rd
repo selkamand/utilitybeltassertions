@@ -15,10 +15,10 @@ fmterror(...)
 \description{
 A collection of functions that take text and return that same text flanked by  characters
 that will lead to its coloration/formatting when printed to terminals using message/cat. Different presets are available:
-fmterror, fmtwarning, fmtsuccess, fmtbold.
+utilitybeltfmt::fmterror, utilitybeltfmt::fmtwarning, utilitybeltfmt::fmtsuccess, utilitybeltfmt::fmtbold.
 
 If greater control is required, use the crayon package
 }
 \examples{
-message(fmterror("This is a warning"))
+message(utilitybeltfmt::fmterror("This is a warning"))
 }

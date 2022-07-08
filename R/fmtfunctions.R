@@ -4,7 +4,7 @@
 #'
 #' @description A collection of functions that take text and return that same text flanked by  characters
 #' that will lead to its coloration/formatting when printed to terminals using message/cat. Different presets are available:
-#' fmterror, fmtwarning, fmtsuccess, fmtbold.
+#' utilitybeltfmt::fmterror, utilitybeltfmt::fmtwarning, utilitybeltfmt::fmtsuccess, utilitybeltfmt::fmtbold.
 #'
 #' If greater control is required, use the crayon package
 #'
@@ -14,14 +14,14 @@
 #' @export
 #'
 #' @examples
-#' message(fmterror("This is a warning"))
-fmterror <- function(...) { return(crayon::bold(crayon::red(paste0(...))))  }
+#' message(utilitybeltfmt::fmterror("This is a warning"))
+fmterror <- function(...) { .Deprecated(package = "utilitybeltfmt", new = "utilitybeltfmt::fmterror"); return(crayon::bold(crayon::red(paste0(...))))  }
 
 #' @title Colour text
 #'
 #' @description A collection of functions that take text and return that same text flanked by  characters
 #' that will lead to its coloration/formatting when printed to terminals using message/cat. Different presets are available:
-#' fmterror, fmtwarning, fmtsuccess, fmtbold.
+#' utilitybeltfmt::fmterror, utilitybeltfmt::fmtwarning, utilitybeltfmt::fmtsuccess, utilitybeltfmt::fmtbold.
 #'
 #' If greater control is required, use the crayon package
 #'
@@ -30,13 +30,13 @@ fmterror <- function(...) { return(crayon::bold(crayon::red(paste0(...))))  }
 #' @return (string) Input text flanked by relevant Ansi escape codes
 #' @export
 #'
-fmtwarning <- function(...) { return(crayon::bold(crayon::yellow(paste0(...))))  }
+fmtwarning <- function(...) { .Deprecated(package = "utilitybeltfmt", new = "utilitybeltfmt::fmtwarning"); return(crayon::bold(crayon::yellow(paste0(...))))  }
 
 #' @title Colour text
 #'
 #' @description A collection of functions that take text and return that same text flanked by  characters
 #' that will lead to its coloration/formatting when printed to terminals using message/cat. Different presets are available:
-#' fmterror, fmtwarning, fmtsuccess, fmtbold.
+#' utilitybeltfmt::fmterror, utilitybeltfmt::fmtwarning, utilitybeltfmt::fmtsuccess, utilitybeltfmt::fmtbold.
 #'
 #' If greater control is required, use the crayon package
 #'
@@ -45,13 +45,13 @@ fmtwarning <- function(...) { return(crayon::bold(crayon::yellow(paste0(...)))) 
 #' @return (string) Input text flanked by relevant Ansi escape codes
 #' @export
 #'
-fmtsuccess <- function(...) { return(crayon::bold(crayon::green(paste0(...))))  }
+fmtsuccess <- function(...) { .Deprecated(package = "utilitybeltfmt", new = "utilitybeltfmt::fmtsuccess"); return(crayon::bold(crayon::green(paste0(...))))  }
 
 #' @title Colour text
 #'
 #' @description A collection of functions that take text and return that same text flanked by  characters
 #' that will lead to its coloration/formatting when printed to terminals using message/cat. Different presets are available:
-#' fmterror, fmtwarning, fmtsuccess, fmtbold.
+#' utilitybeltfmt::fmterror, utilitybeltfmt::fmtwarning, utilitybeltfmt::fmtsuccess, utilitybeltfmt::fmtbold.
 #'
 #' If greater control is required, use the crayon package
 #'
@@ -60,4 +60,7 @@ fmtsuccess <- function(...) { return(crayon::bold(crayon::green(paste0(...))))  
 #' @return (string) Input text flanked by relevant Ansi escape codes
 #' @export
 #'
-fmtbold <- function(...) { return(crayon::bold(paste0(...)))  }
+fmtbold <- function(...) {
+  .Deprecated(package = "utilitybeltfmt", new = "utilitybeltfmt::fmtbold")
+  return(crayon::bold(paste0(...)))
+  }

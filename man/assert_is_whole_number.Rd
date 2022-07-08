@@ -9,7 +9,7 @@ assert_is_whole_number(object, msg = "")
 \arguments{
 \item{object}{Some value you want to assert is a whole number (single scalar value)}
 
-\item{msg}{Some message to print on failure (appended to the hard-coded message). Will automatically get wrapped in fmterror (string)}
+\item{msg}{Some message to print on failure (appended to the hard-coded message). Will automatically get wrapped in utilitybeltfmt::fmterror (string)}
 }
 \value{
 invisible(TRUE) if the object passes the assertion. Throws an error if it does not.

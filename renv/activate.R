@@ -206,8 +206,8 @@ local({
     }
   
     # if we got here, we failed to find renv
-    fmt <- "renv %s is not available from your declared package repositories"
-    stop(sprintf(fmt, version))
+    utilitybeltfmt::fmt <- "renv %s is not available from your declared package repositories"
+    stop(sprintf(utilitybeltfmt::fmt, version))
   
   }
   
@@ -248,14 +248,14 @@ local({
     # prepare download options
     pat <- Sys.getenv("GITHUB_PAT")
     if (nzchar(Sys.which("curl")) && nzchar(pat)) {
-      fmt <- "--location --fail --header \"Authorization: token %s\""
-      extra <- sprintf(fmt, pat)
+      utilitybeltfmt::fmt <- "--location --fail --header \"Authorization: token %s\""
+      extra <- sprintf(utilitybeltfmt::fmt, pat)
       saved <- options("download.file.method", "download.file.extra")
       options(download.file.method = "curl", download.file.extra = extra)
       on.exit(do.call(base::options, saved), add = TRUE)
     } else if (nzchar(Sys.which("wget")) && nzchar(pat)) {
-      fmt <- "--header=\"Authorization: token %s\""
-      extra <- sprintf(fmt, pat)
+      utilitybeltfmt::fmt <- "--header=\"Authorization: token %s\""
+      extra <- sprintf(utilitybeltfmt::fmt, pat)
       saved <- options("download.file.method", "download.file.extra")
       options(download.file.method = "wget", download.file.extra = extra)
       on.exit(do.call(base::options, saved), add = TRUE)
@@ -514,14 +514,14 @@ local({
     else
       paste("renv", loadedversion, sep = "@")
   
-    fmt <- paste(
+    utilitybeltfmt::fmt <- paste(
       "renv %1$s was loaded from project library, but this project is configured to use renv %2$s.",
       "Use `renv::record(\"%3$s\")` to record renv %1$s in the lockfile.",
       "Use `renv::restore(packages = \"renv\")` to install renv %2$s into the project library.",
       sep = "\n"
     )
   
-    msg <- sprintf(fmt, loadedversion, version, remote)
+    msg <- sprintf(utilitybeltfmt::fmt, loadedversion, version, remote)
     warning(msg, call. = FALSE)
   
     FALSE
