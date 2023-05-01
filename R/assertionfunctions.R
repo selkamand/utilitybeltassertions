@@ -150,7 +150,7 @@ assert_files_exist <- function(filepaths, supplementary_error_message = ""){
 #' @param name name used to describe test values. Used in error message reporting (i.e. 'name' must be one of <acceptable_values>)
 #'
 #' @export
-#'
+#' @importFrom rlang caller_arg
 #' @examples
 #' set = c("A", "B", "C")
 #' letters = c("A", "B", "B")
